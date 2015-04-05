@@ -1,0 +1,14 @@
+name: ComJail
+main: com.comdude2.matt.plugins.comjail.main.ComJail
+version: 1.0
+commands:
+   jail:
+      description: This is the main command for this plugin.
+      usage: /<command> [sub-command]
+      permission: jail.use
+      permission-message: You don't have permission to do this!
+   jailcheck:
+      description: Checks how long you have left in jail
+      usage: /<command> [sub-command]
+      permission: jail.check
+      permission-message: You don't have permission to do this!
