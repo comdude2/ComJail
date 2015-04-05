@@ -1,5 +1,5 @@
 name: ComJail
-main: com.comdude2.matt.plugins.comjail.main.ComJail
+main: net.mcviral.dev.plugins.comjail.main.ComJail
 version: 1.0
 commands:
    jail:

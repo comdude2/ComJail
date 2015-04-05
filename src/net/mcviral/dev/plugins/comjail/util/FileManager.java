@@ -1,5 +1,5 @@
 /*
-ComChat - A chat plugin for Minecraft servers
+ComJail - A jail plugin for Minecraft servers
 Copyright (C) 2015  comdude2 (Matt Armer)
 
 This program is free software: you can redistribute it and/or modify
