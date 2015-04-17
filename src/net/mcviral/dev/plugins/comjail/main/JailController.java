@@ -27,12 +27,14 @@ import java.util.UUID;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.Plugin;
 
 import net.mcviral.dev.plugins.comjail.events.CommandListener;
 import net.mcviral.dev.plugins.comjail.events.JoinEvent;
 import net.mcviral.dev.plugins.comjail.events.KickEvent;
 import net.mcviral.dev.plugins.comjail.events.QuitEvent;
+import net.mcviral.dev.plugins.comjail.events.RespawnEvent;
 import net.mcviral.dev.plugins.comjail.events.TeleportEvent;
 import net.mcviral.dev.plugins.comjail.objects.JailedPlayer;
 
@@ -45,13 +47,14 @@ public class JailController {
 	
 	public JailController(Plugin mplugin){
 		plugin = mplugin;
-		jail = new Location(plugin.getServer().getWorld("prison"), 1210, 73, 63);
+		jail = new Location(plugin.getServer().getWorld("world"), 13, 49, 21);
 		//jail = new Location(plugin.getServer().getWorld("world"), 176, 67, 251);
 		plugin.getServer().getPluginManager().registerEvents(new JoinEvent(plugin, this), plugin);
 		plugin.getServer().getPluginManager().registerEvents(new QuitEvent(plugin, this), plugin);
 		plugin.getServer().getPluginManager().registerEvents(new KickEvent(plugin, this), plugin);
 		plugin.getServer().getPluginManager().registerEvents(new TeleportEvent(plugin, this), plugin);
 		plugin.getServer().getPluginManager().registerEvents(new CommandListener(plugin, this), plugin);
+		plugin.getServer().getPluginManager().registerEvents(new RespawnEvent(this), plugin);
 		
 		taskid = plugin.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable(){
 			public void run(){
@@ -84,6 +87,7 @@ public class JailController {
 	
 	public void shutdown(){
 		plugin.getServer().getScheduler().cancelTask(taskid);
+		HandlerList.unregisterAll(plugin);
 	}
 	
 	public boolean jail(UUID uuid, Date expires){
@@ -141,6 +145,10 @@ public class JailController {
 	
 	public LinkedList <JailedPlayer> getJailed(){
 		return jailedplayers;
+	}
+	
+	public Location getJail(){
+		return jail;
 	}
 	
 	public String me(){
